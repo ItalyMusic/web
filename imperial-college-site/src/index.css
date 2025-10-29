@@ -1,0 +1,375 @@
+@import "tailwindcss";
+
+/* Custom CSS Variables for Imperial College Egypt */
+:root {
+  --color-imperial-burgundy: #732638;
+  --color-imperial-dark: #1e0a0f;
+}
+
+/* Base Styles */
+body {
+  background: linear-gradient(to bottom right, var(--color-imperial-burgundy), #4a1a26, var(--color-imperial-dark));
+  color: white;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Animated gradient background with noise texture */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(115, 38, 56, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(30, 10, 15, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(115, 38, 56, 0.2) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Subtle noise texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Glass morphism card/panel */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: all 300ms ease;
+}
+
+.glass-panel:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Glass button */
+.glass-button {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.glass-button:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.glass-button:active {
+  transform: scale(0.95);
+}
+
+/* Menu overlay glass effect */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(30, 10, 15, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 300ms ease-in-out;
+}
+
+/* Menu panel */
+.menu-panel {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 28rem;
+  height: 100%;
+  padding: 2rem;
+  margin-left: auto;
+  transform: translateX(0);
+  transition: transform 300ms ease-out;
+}
+
+/* Menu item with bottom-to-top hover effect */
+.menu-item {
+  position: relative;
+  display: block;
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  transition: all 280ms cubic-bezier(0.22, 0.9, 0.33, 1);
+  overflow: hidden;
+}
+
+.menu-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.1), transparent);
+  transition: all 280ms ease-out;
+  z-index: -1;
+}
+
+.menu-item:hover::before {
+  height: 100%;
+}
+
+.menu-item:hover {
+  color: var(--color-imperial-burgundy);
+  transform: translateY(-6px);
+}
+
+/* Staggered animation delay for menu items */
+.menu-item:nth-child(1) { transition-delay: 0ms; }
+.menu-item:nth-child(2) { transition-delay: 40ms; }
+.menu-item:nth-child(3) { transition-delay: 80ms; }
+.menu-item:nth-child(4) { transition-delay: 120ms; }
+.menu-item:nth-child(5) { transition-delay: 160ms; }
+.menu-item:nth-child(6) { transition-delay: 200ms; }
+
+/* Hamburger icon with gradient hover effect */
+.hamburger-icon {
+  color: white;
+  font-size: 1.875rem;
+  font-weight: 300;
+  transition: all 220ms ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.hamburger-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, var(--color-imperial-burgundy), transparent);
+  opacity: 0;
+  transition: opacity 220ms;
+  z-index: -1;
+  filter: blur(4px);
+}
+
+.hamburger-icon:hover::after {
+  opacity: 0.5;
+}
+
+.hamburger-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Content container */
+.content-container {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .content-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section heading */
+.section-heading {
+  font-size: 2.25rem;
+  font-weight: 700;
+  background: linear-gradient(to right, white, white, rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-heading {
+    font-size: 3.75rem;
+  }
+}
+
+/* Floating contact button */
+.floating-contact {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transition: all 300ms ease;
+}
+
+.floating-contact:hover {
+  box-shadow: 0 0 30px rgba(115, 38, 56, 0.5);
+  transform: scale(1.05);
+}
+
+/* Link styles */
+.link-hover {
+  position: relative;
+  display: inline-block;
+  transition: color 220ms ease-in-out;
+}
+
+.link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-imperial-burgundy);
+  transition: all 280ms ease-out;
+}
+
+.link-hover:hover::after {
+  width: 100%;
+}
+
+.link-hover:hover {
+  color: var(--color-imperial-burgundy);
+}
+
+/* Custom animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 300ms ease-out forwards;
+}
+
+.animate-slide-out-right {
+  animation: slideOutRight 300ms ease-in forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 300ms ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fadeOut 300ms ease-in forwards;
+}
+
+/* Smooth scroll */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--color-imperial-burgundy);
+  outline-offset: 2px;
+}
