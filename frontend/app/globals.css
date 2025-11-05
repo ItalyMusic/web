@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: linear-gradient(135deg, #0B3D2E 0%, #00FF8C 100%);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+.glow-border {
+  box-shadow: 0 0 30px rgba(0, 255, 140, 0.5);
+}
+
+.glow {
+  text-shadow: 0 0 8px rgba(0, 255, 140, 0.6);
+}
+
+.shine::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.shine:hover::after {
+  opacity: 1;
+  animation: shine 1.6s ease forwards;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-150%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(150%) rotate(25deg);
+  }
+}
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+input[type='file']::-webkit-file-upload-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  color: white;
+}
